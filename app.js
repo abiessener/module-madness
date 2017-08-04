@@ -30,8 +30,9 @@ app.post('/random-balance', function (req, res) {
 
     var output = {
         string: moduleThree.accountString,
-        dollar: moduleThree.randomDollar(156301, 156301)
+        dollar: moduleThree.randomDollar(min, max)
     }
+    
     res.send(output);
 });
 
