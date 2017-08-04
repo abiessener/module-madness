@@ -3,21 +3,27 @@ $(document).ready(function () {
         method: 'GET',
         url: '/moduleMadness',
         success: function (response) {
-            $('body').append('<p>' + response.string + '<br>'  + response.dollar + '</p>');
+            $('#moduleMadnessDiv').append('<p>' + response.string + '<br>' + response.dollar + '</p>');
         }
     });
 
-    var userInput = {
-        min: 432,
-        max: 7894523
-    };
 
-    $.ajax({
-        method: 'POST',
-        url: '/random-balance',
-        data: userInput,
-        success: function (response) {
-            $('body').append('<p>' + response.string + '<br>'  + response.dollar + '</p>');
-        }
-    })    
+
+    $('#submitButton').on('click', function () {
+        //get the input and stick it in userInput
+        var userInput = {};
+
+        userInput.min = $('#inputMin').val();
+        userInput.max = $('#inputMax').val();
+        $.ajax({
+            method: 'POST',
+            url: '/random-balance',
+            data: userInput,
+            success: function (response) {
+                $('#userResultDiv').append('<p>' + response.string + '<br>' + response.dollar + '</p>');
+                $('#inputMin').val('');
+                $('#inputMax').val('');
+            }
+        });
+    })
 });
